@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link type="image/png" rel="icon"
+        href="https://upload.wikimedia.org/wikipedia/commons/thumb/3/32/Tic_tac_toe.svg/2000px-Tic_tac_toe.svg.png">
+    <title>Tic Tac Toe</title>
+    <style>
+        body {
+            background-image: linear-gradient(to right bottom, rgb(204, 30, 30), rgb(0, 0, 0));
+            background-attachment: fixed;
+        }
+
+        h1 {
+            text-decoration: underline;
+            color: aqua;
+        }
+
+        table {
+            border: 2px solid black;
+            margin-left: auto;
+            margin-right: auto;
+            background-image: linear-gradient(to left top, rgb(216, 184, 20), rgb(105, 203, 35));
+        }
+
+        th {
+            border: 1px dotted black;
+            height: 150px;
+            width: 150px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        img {
+            height: 75px;
+            width: 75px;
+            margin-left: 35px;
+            margin-top: -35px;
+        }
+
+        #o {
+            display: none;
+        }
+
+        #x {
+            display: none;
+        }
+
+        div {
+            height: 150px;
+            width: 150px;
+        }
+
+        button {
+            margin: auto;
+            height: 75px;
+            width: 150px;
+            background-color: brown;
+            color: aliceblue;
+        }
+
+        button:active {
+            transform: translateY(5px);
+        }
+    </style>
+</head>
+
+<body>
+    <h1>
+        <center>Tic Tac Toe</center>
+    </h1>
+    <table>
+        <tr>
+            <th id="ox">
+                <div id="ox1">
+                    <img id="o"
+                        src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/Letter_o.svg/1200px-Letter_o.svg.png"><img
+                        id="x"
+                        src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/LetterX.svg/1200px-LetterX.svg.png">
+                </div>
+            </th>
+            <th id="ox">
+                <div id="ox11">
+                    <img id="o"
+                        src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/Letter_o.svg/1200px-Letter_o.svg.png"><img
+                        id="x"
+                        src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/LetterX.svg/1200px-LetterX.svg.png">
+                </div>
+            </th>
+            <th id="ox">
+                <div id="ox111">
+                    <img id="o"
+                        src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/Letter_o.svg/1200px-Letter_o.svg.png"><img
+                        id="x"
+                        src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/LetterX.svg/1200px-LetterX.svg.png">
+                </div>
+            </th>
+        </tr>
+        <tr>
+            <th id="ox">
+                <div id="ox2">
+                    <img id="o"
+                        src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/Letter_o.svg/1200px-Letter_o.svg.png"><img
+                        id="x"
+                        src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/LetterX.svg/1200px-LetterX.svg.png">
+                </div>
+            </th>
+            <th id="ox">
+                <div id="ox22">
+                    <img id="o"
+                        src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/Letter_o.svg/1200px-Letter_o.svg.png"><img
+                        id="x"
+                        src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/LetterX.svg/1200px-LetterX.svg.png">
+                </div>
+            </th>
+            <th id="ox">
+                <div id="ox222">
+                    <img id="o"
+                        src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/Letter_o.svg/1200px-Letter_o.svg.png"><img
+                        id="x"
+                        src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/LetterX.svg/1200px-LetterX.svg.png">
+                </div>
+            </th>
+        </tr>
+        <tr>
+            <th id="ox">
+                <div id="ox3">
+                    <img id="o"
+                        src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/Letter_o.svg/1200px-Letter_o.svg.png"><img
+                        id="x"
+                        src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/LetterX.svg/1200px-LetterX.svg.png">
+                </div>
+            </th>
+            <th id="ox">
+                <div id="ox33">
+                    <img id="o"
+                        src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/Letter_o.svg/1200px-Letter_o.svg.png"><img
+                        id="x"
+                        src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/LetterX.svg/1200px-LetterX.svg.png">
+                </div>
+            </th>
+            <th id="ox">
+                <div id="ox333">
+                    <img id="o"
+                        src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/Letter_o.svg/1200px-Letter_o.svg.png"><img
+                        id="x"
+                        src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/LetterX.svg/1200px-LetterX.svg.png">
+                </div>
+            </th>
+        </tr>
+    </table>
+    <button type="button" id="re"> New Game </button>
+    <script>
+        let zero = document.querySelectorAll('#o');
+        let cross = document.querySelectorAll('#x');
+        let ox = document.querySelectorAll('#ox');
+
+        let arr = [null, null, null, null, null, null, null, null, null];
+        console.log(arr);
+
+        document.getElementById('re').addEventListener('click', function () {
+            location.reload();
+        });
+
+        let count = 0;
+
+        function z(...zr) {
+            for (let x of zr) {
+                ox[x].addEventListener('click', function () {
+                    cross[x].style.display = 'none';
+                    zero[x].style.display = 'block';
+                    ox[x].style.pointerEvents = 'none';
+                    arr[x] = 0;
+                    count++;
+                    console.log("ZeroCount ", count);
+                    if (count == 16) {
+                        if (arr[0] == 0 && arr[1] == 0 && arr[2] == 0) {
+                            alert("Player ⭕ Wins!!!");
+                            setTimeout(() => {
+                                location.reload()
+                            }, 750);
+                        }
+                        else if (arr[0] == 0 && arr[4] == 0 && arr[8] == 0) {
+                            alert("Player ⭕ Wins!!!");
+                            setTimeout(() => {
+                                location.reload()
+                            }, 750);
+                        }
+                        else if (arr[0] == 0 && arr[3] == 0 && arr[6] == 0) {
+                            alert("Player ⭕ Wins!!!");
+                            setTimeout(() => {
+                                location.reload()
+                            }, 750);
+                        }
+                        else if (arr[3] == 0 && arr[4] == 0 && arr[5] == 0) {
+                            alert("Player ⭕ Wins!!!");
+                            setTimeout(() => {
+                                location.reload()
+                            }, 750);
+                        }
+                        else if (arr[6] == 0 && arr[7] == 0 && arr[8] == 0) {
+                            alert("Player ⭕ Wins!!!");
+                            setTimeout(() => {
+                                location.reload()
+                            }, 750);
+                        }
+                        else if (arr[6] == 0 && arr[4] == 0 && arr[2] == 0) {
+                            alert("Player ⭕ Wins!!!");
+                            setTimeout(() => {
+                                location.reload()
+                            }, 750);
+                        }
+                        else if (arr[1] == 0 && arr[4] == 0 && arr[7] == 0) {
+                            alert("Player ⭕ Wins!!!");
+                            setTimeout(() => {
+                                location.reload()
+                            }, 750);
+                        }
+                        else if (arr[2] == 0 && arr[5] == 0 && arr[8] == 0) {
+                            alert("Player ⭕ Wins!!!");
+                            setTimeout(() => {
+                                location.reload()
+                            }, 750);
+                        }
+                    }
+                    else if (count == 64) {
+                        if (arr[0] == 0 && arr[1] == 0 && arr[2] == 0) {
+                            alert("Player ⭕ Wins!!!");
+                            setTimeout(() => {
+                                location.reload()
+                            }, 750);
+                        }
+                        else if (arr[0] == 0 && arr[4] == 0 && arr[8] == 0) {
+                            alert("Player ⭕ Wins!!!");
+                            setTimeout(() => {
+                                location.reload()
+                            }, 750);
+                        }
+                        else if (arr[0] == 0 && arr[3] == 0 && arr[6] == 0) {
+                            alert("Player ⭕ Wins!!!");
+                            setTimeout(() => {
+                                location.reload()
+                            }, 750);
+                        }
+                        else if (arr[3] == 0 && arr[4] == 0 && arr[5] == 0) {
+                            alert("Player ⭕ Wins!!!");
+                            setTimeout(() => {
+                                location.reload()
+                            }, 750);
+                        }
+                        else if (arr[6] == 0 && arr[7] == 0 && arr[8] == 0) {
+                            alert("Player ⭕ Wins!!!");
+                            setTimeout(() => {
+                                location.reload()
+                            }, 750);
+                        }
+                        else if (arr[6] == 0 && arr[4] == 0 && arr[2] == 0) {
+                            alert("Player ⭕ Wins!!!");
+                            setTimeout(() => {
+                                location.reload()
+                            }, 750);
+                        }
+                        else if (arr[1] == 0 && arr[4] == 0 && arr[7] == 0) {
+                            alert("Player ⭕ Wins!!!");
+                            setTimeout(() => {
+                                location.reload()
+                            }, 750);
+                        }
+                        else if (arr[2] == 0 && arr[5] == 0 && arr[8] == 0) {
+                            alert("Player ⭕ Wins!!!");
+                            setTimeout(() => {
+                                location.reload()
+                            }, 750);
+                        }
+                    }
+                    else if (count == 256) {
+                        if (arr[0] == 0 && arr[1] == 0 && arr[2] == 0) {
+                            alert("Player ⭕ Wins!!!");
+                            setTimeout(() => {
+                                location.reload()
+                            }, 750);
+                        }
+                        else if (arr[0] == 0 && arr[4] == 0 && arr[8] == 0) {
+                            alert("Player ⭕ Wins!!!");
+                            setTimeout(() => {
+                                location.reload()
+                            }, 750);
+                        }
+                        else if (arr[0] == 0 && arr[3] == 0 && arr[6] == 0) {
+                            alert("Player ⭕ Wins!!!");
+                            setTimeout(() => {
+                                location.reload()
+                            }, 750);
+                        }
+                        else if (arr[3] == 0 && arr[4] == 0 && arr[5] == 0) {
+                            alert("Player ⭕ Wins!!!");
+                            setTimeout(() => {
+                                location.reload()
+                            }, 750);
+                        }
+                        else if (arr[6] == 0 && arr[7] == 0 && arr[8] == 0) {
+                            alert("Player ⭕ Wins!!!");
+                            setTimeout(() => {
+                                location.reload()
+                            }, 750);
+                        }
+                        else if (arr[6] == 0 && arr[4] == 0 && arr[2] == 0) {
+                            alert("Player ⭕ Wins!!!");
+                            setTimeout(() => {
+                                location.reload()
+                            }, 750);
+                        }
+                        else if (arr[1] == 0 && arr[4] == 0 && arr[7] == 0) {
+                            alert("Player ⭕ Wins!!!");
+                            setTimeout(() => {
+                                location.reload()
+                            }, 750);
+                        }
+                        else if (arr[2] == 0 && arr[5] == 0 && arr[8] == 0) {
+                            alert("Player ⭕ Wins!!!");
+                            setTimeout(() => {
+                                location.reload()
+                            }, 750);
+                        }
+                        else {
+                            alert("A Draw!!!");
+                            setTimeout(() => {
+                                location.reload()
+                            }, 750);
+                        }
+                    }
+                    c(...zr);
+                    console.log(arr);
+                });
+            }
+        }
+
+        function c(...cr) {
+            for (let x of cr) {
+                ox[x].addEventListener('click', function () {
+                    zero[x].style.display = 'none';
+                    cross[x].style.display = 'block';
+                    ox[x].style.pointerEvents = 'none';
+                    arr[x] = 1;
+                    count++;
+                    console.log("CrossCount ", count);
+                    if (count == 32) {
+                        if (arr[0] == 1 && arr[1] == 1 && arr[2] == 1) {
+                            alert("Player ❌ Wins!!!");
+                            setTimeout(() => {
+                                location.reload()
+                            }, 750);
+                        }
+                        else if (arr[0] == 1 && arr[4] == 1 && arr[8] == 1) {
+                            alert("Player ❌ Wins!!!");
+                            setTimeout(() => {
+                                location.reload()
+                            }, 750);
+                        }
+                        else if (arr[0] == 1 && arr[3] == 1 && arr[6] == 1) {
+                            alert("Player ❌ Wins!!!");
+                            setTimeout(() => {
+                                location.reload()
+                            }, 750);
+                        }
+                        else if (arr[3] == 1 && arr[4] == 1 && arr[5] == 1) {
+                            alert("Player ❌ Wins!!!");
+                            setTimeout(() => {
+                                location.reload()
+                            }, 750);
+                        }
+                        else if (arr[6] == 1 && arr[7] == 1 && arr[8] == 1) {
+                            alert("Player ❌ Wins!!!");
+                            setTimeout(() => {
+                                location.reload()
+                            }, 750);
+                        }
+                        else if (arr[6] == 1 && arr[4] == 1 && arr[2] == 1) {
+                            alert("Player ❌ Wins!!!");
+                            setTimeout(() => {
+                                location.reload()
+                            }, 750);
+                        }
+                        else if (arr[1] == 1 && arr[4] == 1 && arr[7] == 1) {
+                            alert("Player ❌ Wins!!!");
+                            setTimeout(() => {
+                                location.reload()
+                            }, 750);
+                        }
+                        else if (arr[2] == 1 && arr[5] == 1 && arr[8] == 1) {
+                            alert("Player ❌ Wins!!!");
+                            setTimeout(() => {
+                                location.reload()
+                            }, 750);
+                        }
+                    }
+                    else if (count == 128) {
+                        if (arr[0] == 1 && arr[1] == 1 && arr[2] == 1) {
+                            alert("Player ❌ Wins!!!");
+                            setTimeout(() => {
+                                location.reload()
+                            }, 750);
+                        }
+                        else if (arr[0] == 1 && arr[4] == 1 && arr[8] == 1) {
+                            alert("Player ❌ Wins!!!");
+                            setTimeout(() => {
+                                location.reload()
+                            }, 750);
+                        }
+                        else if (arr[0] == 1 && arr[3] == 1 && arr[6] == 1) {
+                            alert("Player ❌ Wins!!!");
+                            setTimeout(() => {
+                                location.reload()
+                            }, 750);
+                        }
+                        else if (arr[3] == 1 && arr[4] == 1 && arr[5] == 1) {
+                            alert("Player ❌ Wins!!!");
+                            setTimeout(() => {
+                                location.reload()
+                            }, 750);
+                        }
+                        else if (arr[6] == 1 && arr[7] == 1 && arr[8] == 1) {
+                            alert("Player ❌ Wins!!!");
+                            setTimeout(() => {
+                                location.reload()
+                            }, 750);
+                        }
+                        else if (arr[6] == 1 && arr[4] == 1 && arr[2] == 1) {
+                            alert("Player ❌ Wins!!!");
+                            setTimeout(() => {
+                                location.reload()
+                            }, 750);
+                        }
+                        else if (arr[1] == 1 && arr[4] == 1 && arr[7] == 1) {
+                            alert("Player ❌ Wins!!!");
+                            setTimeout(() => {
+                                location.reload()
+                            }, 750);
+                        }
+                        else if (arr[2] == 1 && arr[5] == 1 && arr[8] == 1) {
+                            alert("Player ❌ Wins!!!");
+                            setTimeout(() => {
+                                location.reload()
+                            }, 750);
+                        }
+                    }
+                    z(...cr);
+                    console.log(arr);
+                });
+            }
+        }
+        document.getElementById("ox1").addEventListener('click', function () {
+            count++;
+            console.log("count ", count);
+            arr[0] = 0;
+            console.log(arr);
+            zero[0].style.display = 'block';
+            document.getElementById("ox22").style.height = '0px';
+            document.getElementById("ox22").style.height = '0px';
+            document.getElementById("ox11").style.width = '0px';
+            document.getElementById("ox11").style.height = '0px';
+            document.getElementById("ox33").style.height = '0px';
+            document.getElementById("ox33").style.height = '0px';
+            document.getElementById("ox222").style.height = '0px';
+            document.getElementById("ox222").style.height = '0px';
+            document.getElementById("ox333").style.height = '0px';
+            document.getElementById("ox333").style.height = '0px';
+            document.getElementById("ox111").style.height = '0px';
+            document.getElementById("ox111").style.height = '0px';
+            document.getElementById("ox1").style.height = '0px';
+            document.getElementById("ox1").style.height = '0px';
+            document.getElementById("ox2").style.height = '0px';
+            document.getElementById("ox2").style.height = '0px';
+            document.getElementById("ox3").style.height = '0px';
+            document.getElementById("ox3").style.height = '0px';
+            c(1, 2, 3, 4, 5, 6, 7, 8);
+        });
+        document.getElementById("ox11").addEventListener('click', function () {
+            count++;
+            console.log("count ", count);
+            arr[1] = 0;
+            console.log(arr);
+            zero[1].style.display = 'block';
+            document.getElementById("ox22").style.height = '0px';
+            document.getElementById("ox22").style.height = '0px';
+            document.getElementById("ox11").style.width = '0px';
+            document.getElementById("ox11").style.height = '0px';
+            document.getElementById("ox33").style.height = '0px';
+            document.getElementById("ox33").style.height = '0px';
+            document.getElementById("ox222").style.height = '0px';
+            document.getElementById("ox222").style.height = '0px';
+            document.getElementById("ox333").style.height = '0px';
+            document.getElementById("ox333").style.height = '0px';
+            document.getElementById("ox111").style.height = '0px';
+            document.getElementById("ox111").style.height = '0px';
+            document.getElementById("ox1").style.height = '0px';
+            document.getElementById("ox1").style.height = '0px';
+            document.getElementById("ox2").style.height = '0px';
+            document.getElementById("ox2").style.height = '0px';
+            document.getElementById("ox3").style.height = '0px';
+            document.getElementById("ox3").style.height = '0px';
+            c(0, 2, 3, 4, 5, 6, 7, 8);
+        });
+        document.getElementById("ox111").addEventListener('click', function () {
+            count++;
+            console.log("count ", count);
+            arr[2] = 0;
+            console.log(arr);
+            zero[2].style.display = 'block';
+            document.getElementById("ox22").style.height = '0px';
+            document.getElementById("ox22").style.height = '0px';
+            document.getElementById("ox11").style.width = '0px';
+            document.getElementById("ox11").style.height = '0px';
+            document.getElementById("ox33").style.height = '0px';
+            document.getElementById("ox33").style.height = '0px';
+            document.getElementById("ox222").style.height = '0px';
+            document.getElementById("ox222").style.height = '0px';
+            document.getElementById("ox333").style.height = '0px';
+            document.getElementById("ox333").style.height = '0px';
+            document.getElementById("ox111").style.height = '0px';
+            document.getElementById("ox111").style.height = '0px';
+            document.getElementById("ox1").style.height = '0px';
+            document.getElementById("ox1").style.height = '0px';
+            document.getElementById("ox2").style.height = '0px';
+            document.getElementById("ox2").style.height = '0px';
+            document.getElementById("ox3").style.height = '0px';
+            document.getElementById("ox3").style.height = '0px';
+            c(1, 0, 3, 4, 5, 6, 7, 8);
+        });
+        document.getElementById("ox2").addEventListener('click', function () {
+            count++;
+            console.log("count ", count);
+            arr[3] = 0;
+            console.log(arr);
+            zero[3].style.display = 'block';
+            document.getElementById("ox22").style.height = '0px';
+            document.getElementById("ox22").style.height = '0px';
+            document.getElementById("ox11").style.width = '0px';
+            document.getElementById("ox11").style.height = '0px';
+            document.getElementById("ox33").style.height = '0px';
+            document.getElementById("ox33").style.height = '0px';
+            document.getElementById("ox222").style.height = '0px';
+            document.getElementById("ox222").style.height = '0px';
+            document.getElementById("ox333").style.height = '0px';
+            document.getElementById("ox333").style.height = '0px';
+            document.getElementById("ox111").style.height = '0px';
+            document.getElementById("ox111").style.height = '0px';
+            document.getElementById("ox1").style.height = '0px';
+            document.getElementById("ox1").style.height = '0px';
+            document.getElementById("ox2").style.height = '0px';
+            document.getElementById("ox2").style.height = '0px';
+            document.getElementById("ox3").style.height = '0px';
+            document.getElementById("ox3").style.height = '0px';
+            c(1, 2, 0, 4, 5, 6, 7, 8);
+        });
+        document.getElementById("ox22").addEventListener('click', function () {
+            count++;
+            console.log("count ", count);
+            arr[4] = 0;
+            console.log(arr);
+            zero[4].style.display = 'block';
+            document.getElementById("ox22").style.height = '0px';
+            document.getElementById("ox22").style.height = '0px';
+            document.getElementById("ox11").style.width = '0px';
+            document.getElementById("ox11").style.height = '0px';
+            document.getElementById("ox33").style.height = '0px';
+            document.getElementById("ox33").style.height = '0px';
+            document.getElementById("ox222").style.height = '0px';
+            document.getElementById("ox222").style.height = '0px';
+            document.getElementById("ox333").style.height = '0px';
+            document.getElementById("ox333").style.height = '0px';
+            document.getElementById("ox111").style.height = '0px';
+            document.getElementById("ox111").style.height = '0px';
+            document.getElementById("ox1").style.height = '0px';
+            document.getElementById("ox1").style.height = '0px';
+            document.getElementById("ox2").style.height = '0px';
+            document.getElementById("ox2").style.height = '0px';
+            document.getElementById("ox3").style.height = '0px';
+            document.getElementById("ox3").style.height = '0px';
+            c(1, 2, 3, 0, 5, 6, 7, 8);
+        });
+        document.getElementById("ox222").addEventListener('click', function () {
+            count++;
+            console.log("count ", count);
+            arr[5] = 0;
+            console.log(arr);
+            zero[5].style.display = 'block';
+            document.getElementById("ox22").style.height = '0px';
+            document.getElementById("ox22").style.height = '0px';
+            document.getElementById("ox11").style.width = '0px';
+            document.getElementById("ox11").style.height = '0px';
+            document.getElementById("ox33").style.height = '0px';
+            document.getElementById("ox33").style.height = '0px';
+            document.getElementById("ox222").style.height = '0px';
+            document.getElementById("ox222").style.height = '0px';
+            document.getElementById("ox333").style.height = '0px';
+            document.getElementById("ox333").style.height = '0px';
+            document.getElementById("ox111").style.height = '0px';
+            document.getElementById("ox111").style.height = '0px';
+            document.getElementById("ox1").style.height = '0px';
+            document.getElementById("ox1").style.height = '0px';
+            document.getElementById("ox2").style.height = '0px';
+            document.getElementById("ox2").style.height = '0px';
+            document.getElementById("ox3").style.height = '0px';
+            document.getElementById("ox3").style.height = '0px';
+            c(1, 2, 3, 4, 0, 6, 7, 8);
+        });
+        document.getElementById("ox3").addEventListener('click', function () {
+            count++;
+            console.log("count ", count);
+            arr[6] = 0;
+            console.log(arr);
+            zero[6].style.display = 'block';
+            document.getElementById("ox22").style.height = '0px';
+            document.getElementById("ox22").style.height = '0px';
+            document.getElementById("ox11").style.width = '0px';
+            document.getElementById("ox11").style.height = '0px';
+            document.getElementById("ox33").style.height = '0px';
+            document.getElementById("ox33").style.height = '0px';
+            document.getElementById("ox222").style.height = '0px';
+            document.getElementById("ox222").style.height = '0px';
+            document.getElementById("ox333").style.height = '0px';
+            document.getElementById("ox333").style.height = '0px';
+            document.getElementById("ox111").style.height = '0px';
+            document.getElementById("ox111").style.height = '0px';
+            document.getElementById("ox1").style.height = '0px';
+            document.getElementById("ox1").style.height = '0px';
+            document.getElementById("ox2").style.height = '0px';
+            document.getElementById("ox2").style.height = '0px';
+            document.getElementById("ox3").style.height = '0px';
+            document.getElementById("ox3").style.height = '0px';
+            c(1, 2, 3, 4, 5, 0, 7, 8);
+        });
+        document.getElementById("ox33").addEventListener('click', function () {
+            count++;
+            console.log("count ", count);
+            arr[7] = 0;
+            console.log(arr);
+            zero[7].style.display = 'block';
+            document.getElementById("ox22").style.height = '0px';
+            document.getElementById("ox22").style.height = '0px';
+            document.getElementById("ox11").style.width = '0px';
+            document.getElementById("ox11").style.height = '0px';
+            document.getElementById("ox33").style.height = '0px';
+            document.getElementById("ox33").style.height = '0px';
+            document.getElementById("ox222").style.height = '0px';
+            document.getElementById("ox222").style.height = '0px';
+            document.getElementById("ox333").style.height = '0px';
+            document.getElementById("ox333").style.height = '0px';
+            document.getElementById("ox111").style.height = '0px';
+            document.getElementById("ox111").style.height = '0px';
+            document.getElementById("ox1").style.height = '0px';
+            document.getElementById("ox1").style.height = '0px';
+            document.getElementById("ox2").style.height = '0px';
+            document.getElementById("ox2").style.height = '0px';
+            document.getElementById("ox3").style.height = '0px';
+            document.getElementById("ox3").style.height = '0px';
+            c(1, 2, 3, 4, 5, 6, 0, 8);
+        });
+        document.getElementById("ox333").addEventListener('click', function () {
+            count++;
+            console.log("count ", count);
+            arr[8] = 0;
+            console.log(arr);
+            zero[8].style.display = 'block';
+            document.getElementById("ox22").style.height = '0px';
+            document.getElementById("ox22").style.height = '0px';
+            document.getElementById("ox11").style.width = '0px';
+            document.getElementById("ox11").style.height = '0px';
+            document.getElementById("ox33").style.height = '0px';
+            document.getElementById("ox33").style.height = '0px';
+            document.getElementById("ox222").style.height = '0px';
+            document.getElementById("ox222").style.height = '0px';
+            document.getElementById("ox333").style.height = '0px';
+            document.getElementById("ox333").style.height = '0px';
+            document.getElementById("ox111").style.height = '0px';
+            document.getElementById("ox111").style.height = '0px';
+            document.getElementById("ox1").style.height = '0px';
+            document.getElementById("ox1").style.height = '0px';
+            document.getElementById("ox2").style.height = '0px';
+            document.getElementById("ox2").style.height = '0px';
+            document.getElementById("ox3").style.height = '0px';
+            document.getElementById("ox3").style.height = '0px';
+            c(0, 1, 2, 3, 4, 5, 6, 7);
+        });
+    </script>
+</body>
+
+</html>
